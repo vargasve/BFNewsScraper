@@ -27,14 +27,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/week18Populater");
+mongoose.connect("mongodb://localhost/bfnPopulater");
 
 // Routes
 
 // A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with request
-  axios.get("http://www.echojs.com/").then(function(response) {
+  axios.get("http://www.buzzfeed.com/News").then(function(response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
 
@@ -64,7 +64,8 @@ app.get("/scrape", function(req, res) {
     });
 
     // If we were able to successfully scrape and save an Article, send a message to the client
-    res.send("Scrape Complete");
+    // res.send("Scrape Complete");
+    res.send(result);
   });
 });
 
